@@ -98,9 +98,9 @@ curl -X GET http://localhost:8080/students
 
   ```json
   [
-    { "id": "1", "firstName": "Alice", "lastName": "White", "age": 20 },
-    { "id": "2", "firstName": "Bob", "lastName": "Johnson", "age": 22 },
-    { "id": "3", "name": "Charlie", "lastName": "Smith" "age": 23 }
+    { "id": 1, "firstName": "Alice", "lastName": "White", "age": 20 },
+    { "id": 2, "firstName": "Bob", "lastName": "Johnson", "age": 22 },
+    { "id": 3, "name": "Charlie", "lastName": "Smith" "age": 23 }
   ]
   ```
 
@@ -112,7 +112,7 @@ curl -X GET http://localhost:8080/students
   Example response for `GET /students/1`:
 
   ```json
-  { "id": "1", "firstName": "Alice", "lastName": "White", "age": 20 }
+  { "id": 1, "firstName": "Alice", "lastName": "White", "age": 20 }
   ```
 
 ### 3. Add a New Student
@@ -131,12 +131,12 @@ curl -X GET http://localhost:8080/students
 
 ### 4. Update a Student
 
-* **Endpoint**: `PUT /students/1`
+* **Endpoint**: `PUT /students/{id}`
 * **Body**:
 
   ```json
   {
-    "id": "1",
+    "id": 1,
     "firstName": "Alice",
     "lastName": "White",
     "age": 24
@@ -146,7 +146,7 @@ curl -X GET http://localhost:8080/students
 
 ### 5. Delete a Student
 
-* **Endpoint**: `DELETE /students/1`
+* **Endpoint**: `DELETE /students/{id}`
 * **Response**: Status code 200 (ok) No content on successful deletion.
 
 ---
