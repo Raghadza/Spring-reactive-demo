@@ -1,6 +1,7 @@
 package com.raghad.reactive.student;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -31,7 +32,7 @@ public class StudentController {
         return studentService.updateStudent(id,student);
     }
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id) {
-        studentService.deleteById(id);
+    public Mono<ResponseEntity<String>> deleteById(@PathVariable Integer id) {
+         return studentService.deleteById(id);
     }
 }

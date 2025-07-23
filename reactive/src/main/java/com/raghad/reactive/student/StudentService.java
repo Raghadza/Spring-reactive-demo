@@ -2,6 +2,7 @@ package com.raghad.reactive.student;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Flux;
@@ -50,7 +51,15 @@ public class StudentService {
                 );
     }
 
-    public void deleteById(Integer id) {
-        studentRepository.deleteById(id).subscribe();
-    }
-}
+    public Mono<ResponseEntity<String>> deleteById(Integer id) {
+        return studentRepository.findById(id)
+                .flatMap(student ->
+                        studentRepository.delete(student)
+                                .thenReturn(ResponseEntity.ok("Student deleted successfully."))
+                )
+                .switchIfEmpty(Mono.fromCallable(() -> {
+                    System.out.println("ID not found: " + id);
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                            .body("Student not found with ID: " + id);
+                }));
+    }}
